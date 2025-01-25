@@ -1,0 +1,590 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Permit to Work Form</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background: #fff;
+        }
+
+        .container {
+            padding-left: 20px;
+            padding-right: 20px;
+            background: #fff;
+        }
+
+        h1,
+        h2 {
+            text-align: center;
+            color: #333;
+            grid-column: span 2;
+        }
+
+        .section {
+            margin-bottom: 20px;
+            border: 2px solid black;
+            padding-left: 20px;
+            padding-top: 20px;
+            padding-bottom: 30px;
+            padding-right: 30px;
+        }
+
+        .midsection {
+            padding: 10px;
+        }
+
+        .SecondSection {
+            margin-bottom: 20px;
+            border: 2px solid black;
+        }
+
+        img {
+            grid-column: span 2;
+            display: block;
+            margin: 0 auto 20px;
+        }
+
+        .PermitAndDate {
+            margin-bottom: 10px;
+            display: flex;
+            flex-direction: row;
+            gap: 60px;
+            font-size: medium;
+            font-weight: 300;
+            width: 100%;
+        }
+
+        .REQUEST {
+            margin-top: 10px;
+        }
+
+        .REQUESTHEADING {
+            font-weight: bold;
+            gap: 25px;
+            display: flex;
+            width: 100%;
+            margin-top: 15px;
+        }
+
+        .REQUESTPOINTS {
+            margin-top: 10px;
+            width: full;
+            height: 100%;
+            padding-left: 20px;
+        }
+
+        .REQUESTPOINTS .request-item {
+            padding-bottom: 5px;
+            margin-bottom: 10px;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .REQUESTPOINTS .number {
+            font-weight: bold;
+            margin-right: 10px;
+        }
+
+        .REQUESTPOINTS .label-text {
+            display: inline-block;
+        }
+
+        .REQUESTPOINTS .dotted-line {
+            display: inline-block;
+            margin-top: 15px;
+        }
+
+        .worktobedone {
+            display: flex;
+            width: max-content;
+            margin-left: 20px;
+        }
+
+        .worktobedone img {
+            width: 15px;
+        }
+
+        .PeriodofPTW {
+            display: flex;
+            flex-direction: row;
+            font-size: medium;
+            font-weight: 300;
+            width: 100%;
+            margin-left: 20px;
+            margin-top: 15px
+        }
+
+        table,
+        th,
+        td {
+            border: 2px solid black;
+            border-collapse: collapse;
+            padding: 13px;
+            font-weight: bold;
+            font-size: small
+        }
+
+        .topcontainer {
+            display: flex;
+            padding: 0px 19px;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .title {
+            text-align: center;
+        }
+
+        .Doc {
+            border: 2px solid black;
+            margin-top: 6px;
+            display: flex;
+            justify-content: flex-end;
+            margin-bottom: 2px;
+            width: max-content;
+            margin-left: 60px;
+        }
+
+        .Docmin {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-end;
+            padding: 10px;
+            gap: 4px;
+        }
+    </style>
+</head>
+
+<body>
+    <div>
+        <div class="topcontainer">
+            <div class="logo">
+                <img src="https://sterlitepower.gis.dhineu.in/assets/images/logo_logo.png" alt="Company Logo"
+                    style="width: 200px; height: 50px; object-fit: contain;">
+            </div>
+            <div class="title">
+                <h3>INTERNAL PERMIT TO WORK</h3>
+            </div>
+            <div class="Doc">
+                <div class="Docmin">
+                    <span>Doc. No: - SGL32/O&M/HSE/IPTW 01</span>
+                    <span>Rev. No: - 01</span>
+                    <span>Date: {{date}}</span>
+                </div>
+            </div>
+        </div>
+        <div class="container">
+            <div class="section">
+                <div class="midsection">
+                    <div class="REQUESTHEADING">
+                        <div class="PermitAndDate">
+                            <label for="permit">Permit No: {{workPermit.permitNo}}</label>
+                            <label for="Date">Date: {{permitDate}}</label>
+                        </div>
+                    </div>
+                    <div class="request-item">
+                        <div class="REQUESTHEADING">
+                            <div
+                                style="margin-bottom: 10px;display: flex;flex-direction: column;font-size: medium;font-weight: 300;width: 100%;gap: 10px;">
+                                <label>Project: {{workPermit.workPackage.line.package.project.name}}</label>
+                                <label>Package: {{workPermit.workPackage.line.package.name}}</label>
+                                <label>Line: {{workPermit.workPackage.line.name}}</label>
+                                <label>WorkPackage: {{workPermit.workPackage.name}}</label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="REQUEST">
+                        <div class="REQUESTHEADING">
+                            <label>*</label>
+                            <label>REQUEST</label>
+                        </div>
+                        <div class="REQUESTPOINTS">
+                            <div class="request-item">
+                                <div style="display: flex;">
+                                    <span class="number">1.</span>
+                                    <span class="label-text"><ins>Period of PTW:</ins></span>
+                                </div>
+                                <div class="PeriodofPTW" style="gap: 10px;">
+                                    <label>Form: {{permitDate}} </label>
+                                    <label>Time: {{workPermit.startTime}} </label>
+                                    <label>To: {{permitDate}} </label>
+                                    <label>Time: {{workPermit.endTime}} </label>
+                                </div>
+                            </div>
+                            <div class="request-item">
+                                <div style="display: flex;">
+                                    <span class="number">2.</span>
+                                    <span class="label-text">Type Of Works: </span>
+                                </div>
+                                <div class="worktobedone" style="margin-top: 8px;">
+                                    {{#each workPermit.workPermitTypeOfWorks}}
+                                    <span>{{this.typeOfWork.name}}{{#unless @last}}, {{/unless}}</span>
+                                    {{/each}}
+                                </div>
+                            </div>
+                            <div class="request-item">
+                                <div style="display: flex;">
+                                    <span class="number">3.</span>
+                                    <span class="label-text"><ins>Work to be done:</ins></span>
+                                </div>
+                                <div class="worktobedone" style="margin-top: 8px;">
+                                    {{#each workPermit.workPermitActivities}}
+                                    <span>{{this.activity.name}}</span>{{#unless @last}}, {{/unless}}
+                                    {{/each}}
+                                </div>
+                            </div>
+
+                            <div class="request-item">
+                                <div style="display: flex;">
+                                    <span class="number">4.</span>
+                                    <span class="label-text"><ins>Details of isolation required (if any):</ins>
+                                        {{workPermit.detailsOfIsolation}} </span>
+                                </div>
+                            </div>
+                            <div class="request-item">
+                                <div style="display: flex;">
+                                    <span class="number">5.</span>
+                                    <span class="label-text"><ins>Precautions taken for safety:</ins>
+                                        {{workPermit.safetyPrecautions}}</span>
+                                </div>
+                            </div>
+                            <div class="request-item">
+                                <div style="display: flex;">
+                                    <span class="number">6.</span>
+                                    <span class="label-text"><ins>Work Permit Files:</ins></span>
+                                </div>
+                                <table style="width:100%;margin-top: 20px;">
+                                    <tr>
+                                        <th style="font-weight: bold;font-size: small; width: 20%">File Type</th>
+                                        <th style="font-weight: bold;font-size: small; width: 80%">File Url</th>
+                                    </tr>
+                                    {{#if workPermit.workPermitFiles.length}}
+                                    {{#each workPermit.workPermitFiles}}
+                                    <tr>
+                                        <td>{{this.workPermitFileType.name}}</td>
+                                        <td><a href="{{fileBasePath}}{{this.fileName}}" target="_blank">{{fileBasePath}}{{this.fileName}}</a></td>
+                                    </tr>
+                                    {{/each}}
+                                    {{else}}
+                                    <tr>
+                                        <td colspan="2" style="text-align: center;">No file found</td>
+                                    </tr>
+                                    {{/if}}
+                                </table>
+                            </div>                            
+                            <div class="request-item">
+                                <div style="display: flex;">
+                                    <span class="number">7.</span>
+                                    <span class="label-text" style="padding-right: 10px;">Number of Persons:
+                                        {{workPermit.workPermitPersons.length}}
+                                    </span>
+                                    <span class="label-text">Number of Towers:
+                                        {{workPermit.workPermitTowers.length}}
+                                    </span>
+                                </div>
+                            </div>
+                            <div class="request-item">
+                                <div style="display: flex;">
+                                    <span class="number">8.</span>
+                                    <span class="label-text"><ins>Work Permit Approval Flow</ins></span>
+                                </div>
+                            </div>
+                            <div class="request-item">
+                                <table style="width: 100%; border-collapse: collapse;">
+                                    <thead>
+                                        <tr>
+                                            <th style="width: 10%;"></th>
+                                            <th style="font-weight: bold; font-size: small; text-align: left;">PTW
+                                                (Requested by)</th>
+                                            <th style="font-weight: bold; font-size: small; text-align: left;">PTW
+                                                (Approved by)</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <!-- Signature Row -->
+                                        <tr>
+                                            <td style="font-weight: bold;">Signature</td>
+                                            <td>
+                                                {{#if workPermitCreatedUserSign}}
+                                                <img src="{{workPermitCreatedUserSign}}" alt="Requested By Signature"
+                                                    style="max-width: 100px; height: auto;">
+                                                {{else}}
+                                                <span>No signature available</span>
+                                                {{/if}}
+                                            </td>
+                                            <td>
+                                                {{#if workPermitApprovedUserSign}}
+                                                <img src="{{workPermitApprovedUserSign}}" alt="Approved By Signature"
+                                                    style="max-width: 100px; height: auto;">
+                                                {{else}}
+                                                <span>No signature available</span>
+                                                {{/if}}
+                                            </td>
+                                        </tr>
+
+                                        <!-- Name Row -->
+                                        <tr>
+                                            <td style="font-weight: bold;">Name</td>
+                                            <td>
+                                                {{#if workPermit.workPermitCreatedBy}}
+                                                {{workPermit.workPermitCreatedBy.firstName}}
+                                                {{workPermit.workPermitCreatedBy.lastName}}
+                                                {{else}}
+                                                <span>No name available</span>
+                                                {{/if}}
+                                            </td>
+                                            <td>
+                                                {{#if workPermit.approvedBy}}
+                                                {{workPermit.approvedBy.firstName}} {{workPermit.approvedBy.lastName}}
+                                                {{else}}
+                                                <span>No name available</span>
+                                                {{/if}}
+                                            </td>
+                                        </tr>
+
+                                        <!-- Designation Row -->
+                                        <tr>
+                                            <td style="font-weight: bold;">Designation</td>
+                                            <td>
+                                                {{#if workPermit.workPermitCreatedBy}}
+                                                {{workPermit.workPermitCreatedBy.userRoles.[0].role.name}}
+                                                {{else}}
+                                                <span>No designation available</span>
+                                                {{/if}}
+                                            </td>
+                                            <td>
+                                                {{#if workPermit.approvedBy}}
+                                                {{workPermit.approvedBy.userRoles.[0].role.name}}
+                                                {{else}}
+                                                <span>No designation available</span>
+                                                {{/if}}
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+
+                        </div>
+                    </div>
+                    {{#if workPermit.workPermitExtend}}
+                    {{#if workPermit.workPermitExtend.extendBy}}
+                    {{#if workPermit.workPermitExtend.approvedBy}}
+                    <div class="REQUEST">
+                        <div class="REQUESTHEADING">
+                            <label>*</label>
+                            <label>EXTENSION OF PERMIT TO WORK:</label>
+                        </div>
+                        <div class="EXTENSIONITEM" style="margin-left: 25px; margin-top: 10px;">
+                            <div class="request-item">
+                                <div style="display: flex;">
+                                    <span class="number">1.</span>
+                                    <span class="label-text">Reason for extension:
+                                        {{workPermit.workPermitExtend.reasonOfExtension}}</span>
+                                </div>
+                            </div>
+                            <div class="request-item" style="margin-top: 10px;">
+                                <div>
+                                    <span class="number">2.</span>
+                                    <label>Form Date: {{workPermit.workPermitExtend.fromDate}}</label>
+                                    <label>Form Time: {{workPermit.workPermitExtend.fromTime}}</label>
+                                    <label>To Date: {{workPermit.workPermitExtend.toDate}}</label>
+                                    <label>To Time: {{workPermit.workPermitExtend.toTime}}</label>
+                                </div>
+                            </div>
+                            <div class="request-item" style="margin-top: 10px;">
+                                <div>
+                                    <span class="number">3.</span>
+                                    <label>Requested by: {{workPermit.workPermitExtend.extendBy.firstName}}
+                                        {{workPermit.workPermitExtend.extendBy.lastName}}</label>
+                                    <label>Issued by: {{workPermit.workPermitExtend.approvedBy.firstName}}
+                                        {{workPermit.workPermitExtend.approvedBy.lastName}}</label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    {{/if}}
+                    {{/if}}
+                    {{/if}}
+                    {{#if workPermit.workPermitReturn}}
+                    {{#if workPermit.workPermitReturn.approvedBy}}
+                    {{#if workPermit.workPermitReturn.returnBy}}
+                    <div class="REQUEST">
+                        <div class="REQUESTHEADING">
+                            <label>*</label>
+                            <label>RETURN OF PERMIT TO WORK:</label>
+                        </div>
+                        <div class="EXTENSIONITEM" style="margin-left: 25px; margin-top: 10px;">
+                            <div class="request-item" style="margin-top: 10px;">
+                                <div>
+                                    <span class="number">1.</span>
+                                    <label>Details of work
+                                        done: {{workPermit.workPermitReturn.detailsOfWorkDone}}</label>
+                                </div>
+                            </div>
+                            <div class="request-item" style="margin-top: 10px;">
+                                <div>
+                                    <span class="number">3.</span>
+                                    <label>Clearance: {{workPermit.workPermitReturn.clearance}}</label>
+                                </div>
+                                <p>I hereby declare that all men and material have been withdrawn and warned that it’s
+                                    no
+                                    longer safe to work on the equipment specified on this permit and all tools, area,
+                                    and
+                                    additional earths are clear.</p>
+                            </div>
+                        </div>
+                        <div class="EXTENSIONITEM" style="margin-left: 25px; margin-top: 10px;">
+                            <div>
+                                <div style="display: flex;">
+                                    <span class="label-text">Signature:
+                                        {{#if workPermitReturnCreatedUserSign}}
+                                        <img src="{{workPermitReturnCreatedUserSign}}" alt="Return By Signature"
+                                            style="max-width: 100px; height: auto;">
+                                        {{else}}
+                                        <span>No signature available</span>
+                                        {{/if}}
+                                    </span>
+                                </div>
+                                <div style="display: flex;">
+                                    <span class="label-text" style="margin-top: 10px;">Name:
+                                        {{workPermit.workPermitReturn.returnBy.firstName}}
+                                        {{workPermit.workPermitReturn.returnBy.lastName}}</span>
+                                </div>
+                                <div class="request-item" style="margin-top: 10px;">
+                                    <div>
+                                        <label>Designation:
+                                            {{workPermit.workPermitReturn.returnBy.userRoles.[0].role.name}} </label>
+                                        <label>Return Date & Time: {{workPermitRetrunTime}} </label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    {{/if}}
+                    {{/if}}
+                    {{/if}}
+                    {{#if workPermit.workPermitCancel}}
+                    {{#if workPermit.workPermitCancel.cancelBy}}
+                    {{#if workPermit.workPermitCancel.approvedBy}}
+                    <div class="REQUEST">
+                        <div class="REQUESTHEADING">
+                            <label>*</label>
+                            <label>CANCELLATION OF PERMIT TO WORK:</label>
+                        </div>
+                        <div class="EXTENSIONITEM" style="margin-left: 25px; margin-top: 10px;">
+                            <div class="request-item" style="margin-top: 10px;">
+                                <div style="display: flex;">
+                                    <span class="number">1.</span>
+                                    <span class="label-text">PTW canceled, and entry made in PTW Register:</span>
+                                </div>
+                            </div>
+                            <div class="request-item" style="margin-top: 10px;">
+                                <div>
+                                    <span class="number">2.</span>
+                                    <label>Sequence of
+                                        Normalization: {{workPermit.workPermitCancel.seqOfNormalization}}</label>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="EXTENSIONITEM" style="margin-left: 25px; margin-top: 10px;">
+                            <div style="display: flex;">
+                                <span class="label-text">Signature:
+                                    {{#if workPermitCancelCreatedUserSign}}
+                                    <img src="{{workPermitCancelCreatedUserSign}}" alt="Return By Signature"
+                                        style="max-width: 100px; height: auto;">
+                                    {{else}}
+                                    <span>No signature available</span>
+                                    {{/if}}
+                                </span>
+                            </div>
+                            <div style="display: flex;">
+                                <span class="label-text" style="margin-top: 10px;">Name:
+                                    {{workPermit.workPermitCancel.cancelBy.firstName}}
+                                    {{workPermit.workPermitCancel.cancelBy.lastName}}</span>
+                            </div>
+                            <div class="request-item" style="margin-top: 10px;">
+                                <div>
+                                    <label>Designation:
+                                        {{workPermit.workPermitCancel.cancelBy.userRoles.[0].role.name}}</label>
+                                    <label>Cancellation Date & Time: {{workPermitCancelTime}}</label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    {{/if}}
+                    {{/if}}
+                    {{/if}}
+                    <div class="REQUEST">
+                        <div class="REQUESTHEADING">
+                            <label>*</label>
+                            <label>Assign Towers:</label>
+                        </div>
+                        <br>
+                        <table style="width:100%">
+                            <thead>
+                                <tr>
+                                    <th style="font-weight: bold; font-size: small;">Tower Name</th>
+                                    <th style="font-weight: bold; font-size: small;">Tower Number</th>
+                                    <th style="font-weight: bold; font-size: small;">Critical</th>
+                                    <th style="font-weight: bold; font-size: small; width: 300px;">Tower Type / Sub Type
+                                    </th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {{#each workPermit.workPermitTowers}}
+                                <tr>
+                                    <td>{{tower.name}}</td>
+                                    <td>{{tower.seq}}</td>
+                                    <td>{{tower.isCritical}}</td>
+                                    <td>{{tower.tower_type}} {{tower.tower_subtype}}</td>
+                                </tr>
+                                {{/each}}
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="REQUEST" style="margin-top: 50px;">
+                        <div class="REQUESTHEADING">
+                            <label>*</label>
+                            <label>Assign Users:</label>
+                        </div>
+                        <br>
+                        <table style="width:100%">
+                            <thead>
+                                <tr>
+                                    <th style="font-weight: bold; font-size: small;">User Name</th>
+                                    <th style="font-weight: bold; font-size: small;">Mobile Number</th>
+                                    <th style="font-weight: bold; font-size: small; width: 300px;">Email</th>
+                                    <th style="font-weight: bold; font-size: small;">User Full Name</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {{#each workPermit.workPermitUsers}}
+                                <tr>
+                                    <td>{{user.userName}}</td>
+                                    <td>{{user.contactNo}}</td>
+                                    <td>{{user.email}}</td>
+                                    <td>{{user.firstName}} {{user.lastName}}</td>
+                                </tr>
+                                {{/each}}
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>
